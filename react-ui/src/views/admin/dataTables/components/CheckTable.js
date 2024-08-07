@@ -1,153 +1,107 @@
+// src/views/admin/dataTables/components/CheckTable.js
+import React from 'react';
+import { useTable, usePagination } from 'react-table';
 import {
-  Flex,
   Table,
-  Checkbox,
-  Tbody,
-  Td,
-  Text,
-  Th,
   Thead,
+  Tbody,
   Tr,
-  useColorModeValue,
+  Th,
+  Td,
+  Box,
+  Button,
+  Select,
+  Flex,
+  Text
 } from "@chakra-ui/react";
-import React, { useMemo } from "react";
-import {
-  useGlobalFilter,
-  usePagination,
-  useSortBy,
-  useTable,
-} from "react-table";
 
-// Custom components
-import Card from "components/card/Card";
-import Menu from "components/menu/MainMenu";
-export default function CheckTable(props) {
-  const { columnsData, tableData } = props;
-
-  const columns = useMemo(() => columnsData, [columnsData]);
-  const data = useMemo(() => tableData, [tableData]);
-
-  const tableInstance = useTable(
-    {
-      columns,
-      data,
-    },
-    useGlobalFilter,
-    useSortBy,
-    usePagination
-  );
-
+const CheckTable = ({ columnsData, tableData }) => {
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    page,
     prepareRow,
-    initialState,
-  } = tableInstance;
-  initialState.pageSize = 11;
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize }
+  } = useTable(
+    {
+      columns: columnsData,
+      data: tableData,
+      initialState: { pageIndex: 0 }
+    },
+    usePagination
+  );
 
-  const textColor = useColorModeValue("secondaryGray.900", "white");
-  const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   return (
-    <Card
-      direction='column'
-      w='100%'
-      px='0px'
-      overflowX={{ sm: "scroll", lg: "hidden" }}>
-      <Flex px='25px' justify='space-between' mb='20px' align='center'>
-        <Text
-          color={textColor}
-          fontSize='22px'
-          fontWeight='700'
-          lineHeight='100%'>
-          Check Table
-        </Text>
-        <Menu />
-      </Flex>
-      <Table {...getTableProps()} variant='simple' color='gray.500' mb='24px'>
+    <Box overflowX="auto">
+      <Table {...getTableProps()} variant="simple">
         <Thead>
-          {headerGroups.map((headerGroup, index) => (
-            <Tr {...headerGroup.getHeaderGroupProps()} key={index}>
-              {headerGroup.headers.map((column, index) => (
-                <Th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                  pe='10px'
-                  key={index}
-                  borderColor={borderColor}>
-                  <Flex
-                    justify='space-between'
-                    align='center'
-                    fontSize={{ sm: "10px", lg: "12px" }}
-                    color='gray.400'>
-                    {column.render("Header")}
-                  </Flex>
-                </Th>
+          {headerGroups.map(headerGroup => (
+            <Tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <Th {...column.getHeaderProps()}>{column.render('Header')}</Th>
               ))}
             </Tr>
           ))}
         </Thead>
         <Tbody {...getTableBodyProps()}>
-          {page.map((row, index) => {
+          {page.map(row => {
             prepareRow(row);
             return (
-              <Tr {...row.getRowProps()} key={index}>
-                {row.cells.map((cell, index) => {
-                  let data = "";
-                  if (cell.column.Header === "NAME") {
-                    data = (
-                      <Flex align='center'>
-                        <Checkbox
-                          defaultChecked={cell.value[1]}
-                          colorScheme='brandScheme'
-                          me='10px'
-                        />
-                        <Text color={textColor} fontSize='sm' fontWeight='700'>
-                          {cell.value[0]}
-                        </Text>
-                      </Flex>
-                    );
-                  } else if (cell.column.Header === "PROGRESS") {
-                    data = (
-                      <Flex align='center'>
-                        <Text
-                          me='10px'
-                          color={textColor}
-                          fontSize='sm'
-                          fontWeight='700'>
-                          {cell.value}%
-                        </Text>
-                      </Flex>
-                    );
-                  } else if (cell.column.Header === "QUANTITY") {
-                    data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
-                    );
-                  } else if (cell.column.Header === "DATE") {
-                    data = (
-                      <Text color={textColor} fontSize='sm' fontWeight='700'>
-                        {cell.value}
-                      </Text>
-                    );
-                  }
-                  return (
-                    <Td
-                      {...cell.getCellProps()}
-                      key={index}
-                      fontSize={{ sm: "14px" }}
-                      minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                      borderColor='transparent'>
-                      {data}
-                    </Td>
-                  );
-                })}
+              <Tr {...row.getRowProps()}>
+                {row.cells.map(cell => (
+                  <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+                ))}
               </Tr>
             );
           })}
         </Tbody>
       </Table>
-    </Card>
+      <Flex mt="4" justifyContent="space-between" alignItems="center">
+        <Flex>
+          <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+            {'<<'}
+          </Button>
+          <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
+            {'<'}
+          </Button>
+          <Button onClick={() => nextPage()} disabled={!canNextPage}>
+            {'>'}
+          </Button>
+          <Button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+            {'>>'}
+          </Button>
+        </Flex>
+        <Flex alignItems="center">
+          <Text mr="8">
+            Page{' '}
+            <strong>
+              {pageIndex + 1} of {pageOptions.length}
+            </strong>
+          </Text>
+          <Select
+            value={pageSize}
+            onChange={e => setPageSize(Number(e.target.value))}
+            width="auto"
+          >
+            {[10, 20, 30, 40, 50].map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </Select>
+        </Flex>
+      </Flex>
+    </Box>
   );
-}
+};
+
+export default CheckTable;

@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY', default='insecure-S#perS3crEt_007')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 try:
     # expects 1 or 0
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "api",
     "api.user",
     "api.authentication",
+    'api.contact',
 ]
 
 MIDDLEWARE = [
@@ -90,12 +91,16 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE"  : env("DB_ENGINE"  , default="django.db.backends.sqlite3"),
-        "NAME"    : env("DB_DATABASE", default=os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER"    : env("DB_USER"    , default=None),
-        "PASSWORD": env("DB_PASSWORD", default=None),
-        "HOST"    : env("DB_HOST"    , default=None),
-        "PORT"    : env("DB_PORT"    , default=None),
+        "ENGINE": "mssql",
+        "NAME": "CH",
+        "USER": "django_connect",
+        "PASSWORD": "django_connect",
+        "HOST": "DESKTOP-OD4305U\\SQLEXPRESS",
+        "PORT": "",
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
+        'extra_params': 'TrustServerCertificate=yes;',
+
+        },
     }
 }
 
@@ -158,7 +163,7 @@ REST_FRAMEWORK = {
 #  CORS 
 # ##################################################################### #
 
-CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOW_ALL_ORIGINS= True
 
 # Load the default ones
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]

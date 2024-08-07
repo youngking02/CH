@@ -1,25 +1,4 @@
-/* eslint-disable */
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| 
- | |_| | | | | |_) || |  / / | | |  \| | | | | || | 
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___|
-                                                                                                                                                                                                                                                                                                                                       
-=========================================================
-* Horizon UI - v1.1.0
-=========================================================
 
-* Product Page: https://www.horizon-ui.com/
-* Copyright 2022 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React,{useState} from "react";
 
 import { useHistory } from "react-router-dom";
@@ -45,7 +24,6 @@ import { HSeparator } from "components/separator/Separator";
 import DefaultAuth from "layouts/auth/Default";
 // Assets
 import illustration from "assets/img/auth/auth.png";
-import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { useAuth } from "../../../auth-context/auth.context";
@@ -64,16 +42,7 @@ function SignIn() {
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
   const textColorBrand = useColorModeValue("brand.500", "white");
   const brandStars = useColorModeValue("brand.500", "brand.400");
-  const googleBg = useColorModeValue("secondaryGray.300", "whiteAlpha.200");
-  const googleText = useColorModeValue("navy.700", "white");
-  const googleHover = useColorModeValue(
-    { bg: "gray.200" },
-    { bg: "whiteAlpha.300" }
-  );
-  const googleActive = useColorModeValue(
-    { bg: "secondaryGray.300" },
-    { bg: "whiteAlpha.200" }
-  );
+  
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   const login = async (event) => {
@@ -118,7 +87,8 @@ function SignIn() {
     return history.push("/dashboards");
   };
   return (
-    <DefaultAuth illustrationBackground={illustration} image={illustration}>
+    
+    <DefaultAuth illustrationBackground={illustration} image={illustration} >
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
         w='100%'
@@ -130,18 +100,22 @@ function SignIn() {
         mb={{ base: "30px", md: "60px" }}
         px={{ base: "25px", md: "0px" }}
         mt={{ base: "40px", md: "14vh" }}
-        flexDirection='column'>
-        <Box me='auto'>
+        flexDirection='column'
+        
+        
+        > 
+        <Box me='auto'
+        >
           <Heading color={textColor} fontSize='36px' mb='10px'>
-            Sign IN
+            Sign in
           </Heading>
           <Text
             mb='36px'
             ms='4px'
             color={textColorSecondary}
             fontWeight='400'
-            fontSize='md'>
-            Open-source Full-stack Starter built with React and Chakra 
+            fontSize='xl'>
+           Bienvenue sur CH-PROVIDER by MOOV AFRICA
           </Text>
         </Box>
         <Flex
@@ -180,7 +154,7 @@ function SignIn() {
             <FormLabel
               display='flex'
               ms='4px'
-              fontSize='sm'
+              fontSize='lg'
               fontWeight='500'
               color={textColor}
               mb='8px'>
@@ -193,7 +167,7 @@ function SignIn() {
               ms={{ base: "0px", md: "0px" }}
               type='email'
               placeholder='mail@simmmple.com'
-              mb='24px'
+              mb='28px'
               defaultValue={email}
               fontWeight='500'
               size='lg'
@@ -204,7 +178,7 @@ function SignIn() {
             />
             <FormLabel
               ms='4px'
-              fontSize='sm'
+              fontSize='lg'
               fontWeight='500'
               color={textColor}
               display='flex'>
@@ -213,9 +187,9 @@ function SignIn() {
             <InputGroup size='md'>
               <Input
                 isRequired={true}
-                fontSize='sm'
+                fontSize='lg'
                 placeholder='Min. 8 characters'
-                mb='24px'
+                mb='28px'
                 size='lg'
                 defaultValue={password}
                 type={show ? "text" : "password"}
@@ -234,7 +208,7 @@ function SignIn() {
                 />
               </InputRightElement>
             </InputGroup>
-            <Flex justifyContent='space-between' align='center' mb='24px'>
+           {/* <Flex justifyContent='space-between' align='center' mb='24px'>
               <FormControl display='flex' alignItems='center'>
                 <Checkbox
                   id='remember-login'
@@ -246,7 +220,7 @@ function SignIn() {
                   mb='0'
                   fontWeight='normal'
                   color={textColor}
-                  fontSize='sm'>
+                  fontSize='lg'>
                   Keep me logged in
                 </FormLabel>
               </FormControl>
@@ -259,19 +233,19 @@ function SignIn() {
                   Forgot password?
                 </Text>
               </NavLink>
-            </Flex>
+            </Flex>*/}
             <Button
-              fontSize='sm'
+              fontSize='xl'
               variant='brand'
               fontWeight='500'
               w='100%'
-              h='50'
+              h='70'
               mb='24px'
               onClick={login}>
               Sign In
             </Button>
           </FormControl>
-          <Flex
+          {/*<Flex
             flexDirection='column'
             justifyContent='center'
             alignItems='start'
@@ -289,7 +263,7 @@ function SignIn() {
                 </Text>
               </NavLink>
             </Text>
-          </Flex>
+          </Flex>*/}
         </Flex>
       </Flex>
       </Flex>

@@ -37,7 +37,7 @@ export default function AdminNavbar(props) {
     "rgba(244, 247, 254, 0.2)",
     "rgba(11,20,55,0.5)"
   );
-  let navbarBorder = "transparent";
+  let navbarBorder = "brand";
   let secondaryMargin = "0px";
   let paddingX = "15px";
   let gap = "0px";

@@ -5,44 +5,40 @@ import {
   MdBarChart,
   MdPerson,
   MdHome,
-  MdLock,
+//MdLock,
   MdLogout,
-  MdOutlineShoppingCart,
+  //MdOutlineShoppingCart,
 } from "react-icons/md";
 
 // Admin Imports
 import MainDashboard from "views/admin/default";
 import NFTMarketplace from "views/admin/marketplace";
-import Profile from "views/admin/profile";
+//import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
-import RTL from "views/admin/rtl";
+//import RTL from "views/admin/rtl";
 
 // Auth Imports
 // import SignInCentered from "views/auth/signIn";
 import SignIn from "views/auth/signIn/index.jsx";
-import SignUp from "views/auth/signUp/index.jsx";
+//import SignUp from "views/auth/signUp/index.jsx";
 
 
 const routes = [
   {
-    name: "Main Dashboard",
+    name: "CH-Dashboard",
     layout: "/admin",
     path: "/default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: MainDashboard,
   },
   {
-    name: "NFT Marketplace",
+    name: "Profile",
     layout: "/admin",
     path: "/nft-marketplace",
-    icon: (
-      <Icon
-        as={MdOutlineShoppingCart}
-        width='20px'
-        height='20px'
-        color='inherit'
-      />
-    ),
+    
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />
+     
+    ,
     component: NFTMarketplace,
     secondary: true,
   },
@@ -53,13 +49,13 @@ const routes = [
     path: "/data-tables",
     component: DataTables,
   },
-  {
-    name: "Profile",
+  { /*{
+    name: "Essaie",
     layout: "/admin",
     path: "/profile",
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Profile,
-  },
+  },*/},
   {
     name: "Signin",
     layout: "/auth",
@@ -70,7 +66,7 @@ const routes = [
     component: SignIn,
     hide: true
   },
-  {
+  { /*{
     name: "Sign up",
     layout: "/auth",
     path: "/sign-up",
@@ -79,14 +75,14 @@ const routes = [
     ),
     component: SignUp,
     hide: true
-  },
-  {
+  },*/},
+ { /*{
     name: "RTL Admin",
     layout: "/rtl",
     path: "/rtl-default",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: RTL,
-  },
+  },*/}
 ];
 
 export const Logout = [

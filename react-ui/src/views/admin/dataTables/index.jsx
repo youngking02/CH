@@ -1,65 +1,78 @@
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| 
- | |_| | | | | |_) || |  / / | | |  \| | | | | || | 
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___|
-                                                                                                                                                                                                                                                                                                                                       
-=========================================================
-* Horizon UI - v1.1.0
-=========================================================
+import React, { useState } from 'react';
+import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { ChevronDownIcon } from '@chakra-ui/icons';
+import SearchByName from './SearchByName';
+import SearchByPhoneNumber from './SearchByPhoneNumber';
+import SearchByIMSI from './SearchByIMSI';
+import SearchByDateRange from './SearchByDateRange';
+import SearchByIMEI from './SearchByIMEI';
 
-* Product Page: https://www.horizon-ui.com/
-* Copyright 2022 Horizon UI (https://www.horizon-ui.com/)
+const MainComponent = () => {
+  const [activeComponent, setActiveComponent] = useState('name');
 
-* Designed and Coded by Simmmple
+  const renderComponent = () => {
+    switch (activeComponent) {
+      case 'name':
+        return <SearchByName />;
+      case 'number':
+        return <SearchByPhoneNumber />;
+      case 'imsi':
+        return <SearchByIMSI />;
+      case 'dateRange':
+        return <SearchByDateRange />;
+      case 'imei':
+        return <SearchByIMEI />;
+      default:
+        return null;
+    }
+  };
 
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// Chakra imports
-import { Box, SimpleGrid } from "@chakra-ui/react";
-import DevelopmentTable from "views/admin/dataTables/components/DevelopmentTable";
-import CheckTable from "views/admin/dataTables/components/CheckTable";
-import ColumnsTable from "views/admin/dataTables/components/ColumnsTable";
-import ComplexTable from "views/admin/dataTables/components/ComplexTable";
-import {
-  columnsDataDevelopment,
-  columnsDataCheck,
-  columnsDataColumns,
-  columnsDataComplex,
-} from "views/admin/dataTables/variables/columnsData";
-import tableDataDevelopment from "views/admin/dataTables/variables/tableDataDevelopment.json";
-import tableDataCheck from "views/admin/dataTables/variables/tableDataCheck.json";
-import tableDataColumns from "views/admin/dataTables/variables/tableDataColumns.json";
-import tableDataComplex from "views/admin/dataTables/variables/tableDataComplex.json";
-import React from "react";
-
-export default function Settings() {
-  // Chakra Color Mode
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <SimpleGrid
-        mb='20px'
-        columns={{ sm: 1, md: 2 }}
-        spacing={{ base: "20px", xl: "20px" }}>
-        <DevelopmentTable
-          columnsData={columnsDataDevelopment}
-          tableData={tableDataDevelopment}
-        />
-        <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
-        <ColumnsTable
-          columnsData={columnsDataColumns}
-          tableData={tableDataColumns}
-        />
-        <ComplexTable
-          columnsData={columnsDataComplex}
-          tableData={tableDataComplex}
-        />
-      </SimpleGrid>
+    <Box pt={{ base: "200px", md: "80px" }} w="100%" mt="16">
+      <Flex mb="20px" wrap="wrap" justifyContent="space-between" alignItems="center">
+        <Menu>
+          <MenuButton as={Button} colorScheme="blue" fontSize="lg" rightIcon={<ChevronDownIcon />} ml="2">
+            Identité
+          </MenuButton>
+          <MenuList>
+            <MenuItem onClick={() => setActiveComponent('name')}>Search by Name</MenuItem>
+            <MenuItem onClick={() => setActiveComponent('number')}>Search by Number</MenuItem>
+          </MenuList>
+        </Menu>
+        <Button
+          onClick={() => setActiveComponent('imsi')}
+          colorScheme={activeComponent === 'imsi' ? "orange" : "brand"}
+          fontSize="lg"
+          px="6"
+          py="2"
+          rounded="full"
+        >
+          Search by IMSI
+        </Button>
+        <Button
+          onClick={() => setActiveComponent('dateRange')}
+          colorScheme={activeComponent === 'dateRange' ? "orange" : "brand"}
+          fontSize="lg"
+          px="6"
+          py="2"
+          rounded="full"
+        >
+          Search by Date Range
+        </Button>
+        <Button
+          onClick={() => setActiveComponent('imei')}
+          colorScheme={activeComponent === 'imei' ? "orange" : "brand"}
+          fontSize="lg"
+          px="6"
+          py="2"
+          rounded="full"
+        >
+          Search by IMEI
+        </Button>
+      </Flex>
+      {renderComponent()}
     </Box>
   );
-}
+};
+
+export default MainComponent;

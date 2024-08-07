@@ -42,7 +42,7 @@ export default function Footer() {
             href='https://www.simmmple.com'
             target='_blank'
             fontWeight='700'>
-            Simmmple!
+            CH-PROVIDER
           </Link>
           - Coded by 
           <Link
@@ -50,7 +50,7 @@ export default function Footer() {
             color={textColor}
             href='https://appseed.us'
             target='_blank'>
-            AppSeed
+            Moov Africa
           </Link>           
         </Text>
       </Text>

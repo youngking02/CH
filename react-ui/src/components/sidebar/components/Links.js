@@ -45,7 +45,7 @@ export function SidebarLinks(props) {
         return (
           <>
             <Text
-              fontSize={"md"}
+              fontSize={"lg"}
               color={activeColor}
               fontWeight='bold'
               mx='auto'
@@ -83,7 +83,7 @@ export function SidebarLinks(props) {
                           ? activeIcon
                           : textColor
                       }
-                      me='18px'>
+                      me='20px'>
                       {route.icon}
                     </Box>
                     <Text

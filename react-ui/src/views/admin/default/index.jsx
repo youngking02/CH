@@ -60,11 +60,12 @@ import tableDataComplex from "views/admin/default/variables/tableDataComplex.jso
 
 export default function UserReports() {
   // Chakra Color Mode
-  const brandColor = useColorModeValue("brand.500", "white");
-  const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
+  const brandColor = useColorModeValue("orange.500", "white");
+  const boxBg = useColorModeValue("orange.500", "whiteAlpha.100");
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid
+      
         columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }}
         gap='20px'
         mb='20px'>
@@ -99,7 +100,7 @@ export default function UserReports() {
         <MiniStatistics growth='+23%' name='Sales' value='$574.34' />
         <MiniStatistics
           endContent={
-            <Flex me='-16px' mt='10px'>
+            <Flex me='-16px' mt='10px' color='orange'>
               <FormLabel htmlFor='balance'>
                 <Avatar src={Usa} />
               </FormLabel>
@@ -108,7 +109,8 @@ export default function UserReports() {
                 variant='mini'
                 mt='5px'
                 me='0px'
-                defaultValue='usd'>
+                defaultValue='usd'
+                >
                 <option value='usd'>USD</option>
                 <option value='eur'>EUR</option>
                 <option value='gba'>GBA</option>
@@ -117,6 +119,7 @@ export default function UserReports() {
           }
           name='Your balance'
           value='$1,000'
+          
         />
         <MiniStatistics
           startContent={

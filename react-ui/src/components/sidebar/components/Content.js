@@ -3,8 +3,9 @@ import { Box, Flex, Stack } from "@chakra-ui/react";
 //   Custom components
 import Brand from "components/sidebar/components/Brand";
 import Links from "components/sidebar/components/Links";
-import SidebarCard from "components/sidebar/components/SidebarCard";
 import React from "react";
+import illustration from "assets/img/auth/auth.png";
+
 
 // FUNCTIONS
 
@@ -21,12 +22,12 @@ function SidebarContent(props) {
       </Stack>
 
       <Box
-        ps='20px'
-        pe={{ md: "16px", "2xl": "0px" }}
+        ps='10px'
+        pe={{ md: "20px", "2xl": "0px" }}
         mt='60px'
         mb='40px'
         borderRadius='30px'>
-        <SidebarCard />
+           <img src={illustration} alt="Sidebar Bottom Image" style={{ width: '100%', borderRadius: '15px' }} />
       </Box>
     </Flex>
   );

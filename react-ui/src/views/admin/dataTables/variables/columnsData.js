@@ -19,17 +19,24 @@ export const columnsDataDevelopment = [
 
 export const columnsDataCheck = [
   {
-    Header: "NAME",
+    Header: "Type de communication",
     accessor: "name",
   },
   {
-    Header: "PROGRESS",
-    accessor: "progress",
+    Header: "Numero",
+    accessor: "numero",
   },
   {
-    Header: "QUANTITY",
-    accessor: "quantity",
+    Header: "IMEI",
+    accessor: "imei",
   },
+
+  {
+    Header: "IMSI",
+    accessor: "imsi",
+  },
+
+
   {
     Header: "DATE",
     accessor: "date",
@@ -73,3 +80,38 @@ export const columnsDataComplex = [
     accessor: "progress",
   },
 ];
+
+
+
+export const columnsDataCh = [
+  {
+    Header: "Id",
+    accessor: "id",
+  },
+  {
+    Header: "NAME",
+    accessor: "name",
+  },
+
+  {
+    Header: "Number",
+    accessor: "number",
+  },
+
+  {
+    Header: "IMEI",
+    accessor: "imei",
+  },
+
+  {
+    Header: "IMSI",
+    accessor: "imsi",
+  },
+
+  {
+    Header: "Date",
+    accessor: "date",
+  },
+
+];
+

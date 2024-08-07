@@ -2,26 +2,27 @@ import { mode } from "@chakra-ui/theme-tools";
 export const globalStyles = {
   colors: {
     brand: {
-      100: "#E9E3FF",
-      200: "#422AFB",
-      300: "#422AFB",
-      400: "#7551FF",
-      500: "#422AFB",
-      600: "#3311DB",
-      700: "#02044A",
-      800: "#190793",
-      900: "#11047A",
+      100: "#E3F2FD", // bleu clair
+      200: "#BBDEFB", // bleu clair
+      300: "#64B5F6", // bleu
+      400: "#42A5F5", // bleu
+      500: "#2196F3", // bleu
+      600: "#1E88E5", // bleu foncé
+      700: "#1976D2", // bleu foncé
+      800: "#1565C0", // bleu foncé
+      900: "#0D47A1", // bleu très foncé
     },
+  
     brandScheme: {
-      100: "#E9E3FF",
-      200: "#7551FF",
-      300: "#7551FF",
-      400: "#7551FF",
-      500: "#422AFB",
-      600: "#3311DB",
-      700: "#02044A",
-      800: "#190793",
-      900: "#02044A",
+      100: "#FFF3E0", // orange clair
+      200: "#FFE0B2", // orange clair
+      300: "#FFB74D", // orange
+      400: "#FFA726", // orange
+      500: "#FF9800", // orange
+      600: "#FB8C00", // orange foncé
+      700: "#F57C00", // orange foncé
+      800: "#EF6C00", // orange foncé
+      900: "#E65100", // orange très foncé
     },
     brandTabs: {
       100: "#E9E3FF",
@@ -82,12 +83,12 @@ export const globalStyles = {
     global: (props) => ({
       body: {
         overflowX: "hidden",
-        bg: mode("secondaryGray.300", "navy.900")(props),
+        bg: mode("white.700", "white.900")(props), // Fond bleu
         fontFamily: "DM Sans",
         letterSpacing: "-0.5px",
       },
       input: {
-        color: "gray.700",
+        color: "brand.700",
       },
       html: {
         fontFamily: "DM Sans",

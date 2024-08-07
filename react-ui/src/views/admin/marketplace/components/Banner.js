@@ -30,7 +30,7 @@ export default function Banner() {
         }}
         fontWeight='700'
         lineHeight={{ base: "32px", md: "42px" }}>
-        Discover, collect, and sell extraordinary NFTs
+        Bienvenue, ici vous pouvez consulter vôtre profil.
       </Text>
       <Text
         fontSize='md'
@@ -46,8 +46,7 @@ export default function Banner() {
         fontWeight='500'
         mb='40px'
         lineHeight='28px'>
-        Enter in this creative world. Discover now the latest NFTs or start
-        creating your own!
+      
       </Text>
       <Flex align='center'>
         <Button
@@ -61,11 +60,11 @@ export default function Banner() {
           py='20px'
           px='27'
           me='38px'>
-          Discover now
+          Sign in
         </Button>
         <Link>
           <Text color='white' fontSize='sm' fontWeight='500'>
-            Watch video
+            Log out
           </Text>
         </Link>
       </Flex>
