@@ -7,21 +7,21 @@ import SearchByIMSI from './SearchByIMSI';
 import SearchByDateRange from './SearchByDateRange';
 import SearchByIMEI from './SearchByIMEI';
 
-const MainComponent = () => {
-  const [activeComponent, setActiveComponent] = useState('name');
+const Trafic = () => {
+  const [activeComponent, setActiveComponent] = useState('imsi');
 
   const renderComponent = () => {
     switch (activeComponent) {
-      case 'name':
+      /*case 'name':
         return <SearchByName />;
       case 'number':
-        return <SearchByPhoneNumber />;
-     /* case 'imsi':
+        return <SearchByPhoneNumber />;*/
+      case 'imsi':
         return <SearchByIMSI />;
       case 'dateRange':
         return <SearchByDateRange />;
       case 'imei':
-        return <SearchByIMEI />;*/
+        return <SearchByIMEI />;
       default:
         return null;
     }
@@ -42,7 +42,7 @@ const MainComponent = () => {
       boxShadow="2xl"
     >
       <Flex mb="20px" wrap="wrap" justifyContent="space-between" alignItems="center">
-        <Menu>
+      {/*<Menu>
           <MenuButton as={Button}  colorScheme={activeComponent === 'name' ? "orange" : "brand"} fontSize="lg" rightIcon={<ChevronDownIcon />} transition="all 0.2s" _hover={{ transform: 'scale(1.05)' }}>
             Identité
           </MenuButton>
@@ -50,8 +50,8 @@ const MainComponent = () => {
             <MenuItem onClick={() => setActiveComponent('name')}>Search by Name</MenuItem>
             <MenuItem onClick={() => setActiveComponent('number')}>Search by Number</MenuItem>
           </MenuList>
-        </Menu>
-        {/*<Button
+        </Menu>*/}
+        <Button
           onClick={() => setActiveComponent('imsi')}
           colorScheme={activeComponent === 'imsi' ? "orange" : "brand"}
           fontSize="lg"
@@ -86,11 +86,11 @@ const MainComponent = () => {
           _hover={{ transform: 'scale(1.05)' }}
         >
           Traffic via IMEI
-        </Button>*/}
+        </Button>
       </Flex>
       {renderComponent()}
     </Box>
   );
 };
 
-export default MainComponent;
+export default Trafic;

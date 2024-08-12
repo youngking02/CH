@@ -20,7 +20,7 @@ import DataTables from "views/admin/dataTables";
 // Auth Imports
 // import SignInCentered from "views/auth/signIn";
 import SignIn from "views/auth/signIn/index.jsx";
-//import SignUp from "views/auth/signUp/index.jsx";
+import Trafic from "views/admin/dataTables/traffic.js";
 
 
 const routes = [
@@ -43,7 +43,7 @@ const routes = [
     secondary: true,
   },
   {
-    name: "Data Tables",
+    name: "Identité",
     layout: "/admin",
     icon: <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />,
     path: "/data-tables",
@@ -56,6 +56,17 @@ const routes = [
     icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
     component: Profile,
   },*/},
+
+  { 
+    name: "Trafic",
+    layout: "/admin",
+    path: "/traffic",
+    icon: (
+      <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />
+    ),
+    component: Trafic,
+    hide: true
+  },
   {
     name: "Signin",
     layout: "/auth",
@@ -66,16 +77,7 @@ const routes = [
     component: SignIn,
     hide: true
   },
-  { /*{
-    name: "Sign up",
-    layout: "/auth",
-    path: "/sign-up",
-    icon: (
-      <Icon as={MdHome} width='16px' height='16px' color='inherit' />
-    ),
-    component: SignUp,
-    hide: true
-  },*/},
+ 
  { /*{
     name: "RTL Admin",
     layout: "/rtl",

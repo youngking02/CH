@@ -31,7 +31,7 @@ const SearchByIMSI = () => {
   };
 
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "50px" }} w="100%" bg="secondaryGray.400" rounded="xl">
+    <Box pt={{ base: "130px", md: "80px", xl: "50px" }} w="100%" bg="white" rounded="xl">
       <Box pl="4" pr="10">
         <Text fontSize="2xl" mb="6" color="black">Recherche via IMSI pour les numéros de téléphone et les dates d'utilisation</Text>
 
@@ -41,11 +41,11 @@ const SearchByIMSI = () => {
             value={imsi}
             onChange={(e) => setImsi(e.target.value)}
             width="20%"
-            bg="gray.700"
-            color="white"
+            bg="gray.100"
+            color="black"
             fontSize="lg"
-            borderColor="gray.600"
-            _placeholder={{ color: "white" }}
+            borderColor="gray.300"
+            _placeholder={{ color: "gray.500" }}
             mr="2"
           />
           <Input
@@ -54,11 +54,11 @@ const SearchByIMSI = () => {
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             width="20%"
-            bg="gray.700"
-            color="white"
+            bg="gray.100"
+            color="black"
             fontSize="lg"
-            borderColor="gray.600"
-            _placeholder={{ color: "white" }}
+            borderColor="gray.300"
+            _placeholder={{ color: "gray.500" }}
             mr="2"
           />
           <Input
@@ -67,11 +67,11 @@ const SearchByIMSI = () => {
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             width="20%"
-            bg="gray.700"
-            color="white"
+            bg="gray.100"
+            color="black"
             fontSize="lg"
-            borderColor="gray.600"
-            _placeholder={{ color: "white" }}
+            borderColor="gray.300"
+            _placeholder={{ color: "gray.500" }}
             mr="2"
           />
           <Button onClick={searchByIMSI} colorScheme="orange" fontSize="lg" px="6" py="2">
@@ -84,9 +84,9 @@ const SearchByIMSI = () => {
       <Table mt="20px">
         <Thead>
           <Tr>
-            <Th color="Black" fontSize="lg">Phone Number</Th>
-            <Th color="Black" fontSize="lg">Start Date</Th>
-            <Th color="Black" fontSize="lg">End Date</Th>
+            <Th  fontSize="lg">Phone Number</Th>
+            <Th  fontSize="lg">Start Date</Th>
+            <Th  fontSize="lg">End Date</Th>
           </Tr>
         </Thead>
         <Tbody>

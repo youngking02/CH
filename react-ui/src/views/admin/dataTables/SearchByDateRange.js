@@ -37,19 +37,19 @@ const SearchByDateRange = () => {
   
 
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }} w="100%" bg="secondaryGray.400">
-      <Text fontSize="xl" mb="4" color="black"> Entrez le numéro de téléphone et sélectionnez une période pour rechercher les communications. La date de début ne peut pas être antérieure au 1er janvier 2020.</Text>
+    <Box pt={{ base: "130px", md: "80px", xl: "50px" }} w="100%" bg="white" rounded="xl" boxShadow="lg" p={8}>
+      <Text fontSize="2xl" mb="6" color="black"> Entrez le numéro de téléphone et sélectionnez une période . La date de début ne peut pas être antérieure au 1er janvier 2020.</Text>
       <Flex mb="20px" wrap="wrap" justifyContent="space-between" alignItems="center">
         <Input
           placeholder="Numéro de téléphone"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           width="20%"
-          bg="gray.700"
-          color="white"
+          bg="gray.100"
+          color="black"
           fontSize="lg"
-          borderColor="gray.600"
-          _placeholder={{ color: "white" }}
+          borderColor="gray.300"
+          _placeholder={{ color: "gray.500" }}
         />
         <Input
           type="date"
@@ -57,12 +57,12 @@ const SearchByDateRange = () => {
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
           width="20%"
-          bg="gray.700"
-          color="white"
+          bg="gray.100"
+          color="black"
           fontSize="lg"
-          borderColor="gray.600"
+          borderColor="gray.300"
           max={maxStartDate}
-          _placeholder={{ color: "white" }}
+          _placeholder={{ color: "gray.500" }}
         />
         <Input
           type="date"
@@ -70,34 +70,34 @@ const SearchByDateRange = () => {
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
           width="20%"
-          bg="gray.700"
-          color="white"
+          bg="gray.100"
+          color="black"
           fontSize="lg"
-          borderColor="gray.600"
-          _placeholder={{ color: "white" }}
+          borderColor="gray.300"
+          _placeholder={{ color: "gray.500" }}
         />
         <Button
           onClick={searchCommunicationsByDateRange}
-          colorScheme="teal"
+          colorScheme="orange"
           fontSize="lg"
           px="6"
           py="2"
         >
-          Rechercher
+          Search
         </Button>
       </Flex>
       {error && <Text color="red.500">{error}</Text>}
       <Table mt="20px">
         <Thead>
           <Tr>
-            <Th color="Black" fontSize="lg">Correspondant</Th>
-            <Th color="Black" fontSize="lg">Durée</Th>
-            <Th color="Black" fontSize="lg">Horodatage</Th>
-            <Th color="Black" fontSize="lg">IMEI</Th>
-            <Th color="Black" fontSize="lg">Nom du site</Th>
-            <Th color="Black" fontSize="lg">Localité</Th>
-            <Th color="Black" fontSize="lg">IMSI</Th>
-            <Th color="Black" fontSize="lg">Type de communication</Th>
+            <Th  fontSize="lg">Correspondant</Th>
+            <Th  fontSize="lg">Durée</Th>
+            <Th  fontSize="lg">Horodatage</Th>
+            <Th  fontSize="lg">IMEI</Th>
+            <Th  fontSize="lg">Site</Th>
+            <Th  fontSize="lg">Localité</Th>
+            <Th  fontSize="lg">IMSI</Th>
+            <Th  fontSize="lg">Type de communication</Th>
           </Tr>
         </Thead>
         <Tbody>

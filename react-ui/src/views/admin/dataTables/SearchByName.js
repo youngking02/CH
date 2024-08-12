@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Input, Button, Table, Thead, Tbody, Tr, Th, Td, Flex, Text } from "@chakra-ui/react";
+import { Box, Input, Button, Table, Thead, Tbody, Tr, Th, Td, Flex, Text, useColorModeValue, IconButton } from "@chakra-ui/react";
+import { FaFilePdf, FaFileExcel } from 'react-icons/fa';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
-import pdf from "assets/img/avatars/pdf.svg";
-import excel from "assets/img/avatars/excel.svg";
 
 const SearchByName = () => {
   const [searchData, setSearchData] = useState([]);
@@ -63,88 +62,75 @@ const SearchByName = () => {
     XLSX.writeFile(workbook, 'search_results.xlsx');
   };
 
+  const inputBg = useColorModeValue('gray.100', 'gray.700');
+
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "50px" }} w="100%" bg="secondaryGray.400" rounded="xl">
-      <Box pl="4" pr="10">
-        <Text fontSize="2xl" mb="6" color="black">Recherche en fonction du nom et prénom</Text>
-        <Flex mb="50px" wrap="wrap" justifyContent="space-between" alignItems="center">
-          <Input
-            placeholder="Search by name (e.g. John Doe, Jane Smith)"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            width="30%"
-            bg="gray.700"
-            color="white"
-            fontSize="lg"
-            borderColor="gray.600"
-            _placeholder={{ color: "white" }}
-          />
-          <Button
-            onClick={handleSearch}
-            colorScheme="orange"
-            fontSize="lg"
-            px="6"
-            py="2"
-            rounded="full"
-          >
-            Search
-          </Button>
+    <Box pt={{ base: "130px", md: "80px", xl: "50px" }} w="100%" bg="white" rounded="xl" boxShadow="lg" p={8}>
+      <Text fontSize="2xl" mb="6" color="black">Recherche en fonction du nom et prénom</Text>
+      <Flex mb="50px" wrap="wrap" justifyContent="space-between" alignItems="center">
+        <Input
+          placeholder="Entrez le Nom et Prénom (Ex. John Doe, Jane Smith)"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          width="30%"
+          bg={inputBg}
+          color="black"
+          fontSize="lg"
+          borderColor="gray.300"
+          _placeholder={{ color: "gray.500" }}
+        />
+        <Button
+          onClick={handleSearch}
+          colorScheme="blue"
+          fontSize="lg"
+          px="6"
+          py="2"
+          rounded="full"
+          transition="all 0.2s"
+          _hover={{ transform: 'scale(1.05)', boxShadow: 'md' }}
+        >
+          Search
+        </Button>
 
-
-          <Flex >
-          <Button
+        <Flex>
+          <IconButton
+            icon={<FaFilePdf />}
             onClick={handleExportPDF}
             colorScheme="red"
             fontSize="lg"
-            px="6"
-            py="2"
             rounded="full"
             ml="2"
-            bgImage={pdf}
-            bgSize='cover'
-            py={{ base: "30px", md: "20px" }}
-            px={{ base: "30px", md: "24px" }}
-          >
-
-          </Button>
-          <Button
+            aria-label="Export PDF"
+          />
+          <IconButton
+            icon={<FaFileExcel />}
             onClick={handleExportExcel}
             colorScheme="green"
             fontSize="lg"
-            px="6"
-            py="2"
             rounded="full"
             ml="2"
-            bgImage={excel}
-            bgSize='cover'
-            py={{ base: "30px", md: "20px" }}
-            px={{ base: "30px", md: "24px" }}
+            aria-label="Export Excel"
+          />
+        </Flex>
+      </Flex>
 
-            
-          >
-           
-          </Button>
-        </Flex>
-        </Flex>
-       
-      </Box>
       {error && <Text color="red.500">{error}</Text>}
-      <Table mt="20px">
+      <Table mt="20px" variant="striped" colorScheme="gray">
         <Thead>
           <Tr>
-            <Th color="Black" fontSize="lg">First Name</Th>
-            <Th color="Black" fontSize="lg">Last Name</Th>
-            <Th color="Black" fontSize="lg">Number</Th>
-            <Th color="Black" fontSize="lg">Birth Date</Th>
+            <Th fontSize="xl">First Name</Th>
+            <Th fontSize="xl">Last Name</Th>
+            <Th fontSize="xl">Birth Date</Th>
+            <Th fontSize="xl">Phone Numbers</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {Array.isArray(searchData) && searchData.map((contact, index) => (
+          {searchData.map((contact, index) => (
             <Tr key={index}>
-              <Td color="Black" fontSize="lg">{contact.first_name}</Td>
-              <Td color="Black" fontSize="lg">{contact.last_name}</Td>
-              <Td color="Black" fontSize="lg">{contact.phone_number}</Td>
-              <Td color="Black" fontSize="lg">{contact.birth_date}</Td>
+              <Td fontSize="xl">{contact.first_name}</Td>
+              <Td fontSize="xl">{contact.last_name}</Td>
+              <Td fontSize="xl">{contact.birth_date}</Td>
+              <Td fontSize="xl">{contact.phone_numbers ? contact.phone_numbers.join(', ') : 'N/A'}</Td>
             </Tr>
           ))}
         </Tbody>

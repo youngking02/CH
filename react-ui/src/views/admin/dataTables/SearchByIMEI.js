@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
-import { Box, Input, Button, Table, Thead, Tbody, Tr, Th, Td, Flex, Text } from "@chakra-ui/react";
-import { jsPDF } from "jspdf";
-import autoTable from 'jspdf-autotable';
+import {
+  Box,
+  Input,
+  Button,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Flex,
+  Text,
+  Image,
+  useToast,
+} from '@chakra-ui/react';
+import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
+import pdfIcon from 'assets/img/avatars/pdf.svg';
+import excelIcon from 'assets/img/avatars/excel.svg';
 
 const SearchByIMEI = () => {
   const [searchDataIMEI, setSearchDataIMEI] = useState([]);
   const [imeiNumber, setIMEINumber] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [error, setError] = useState('');
+  const toast = useToast();
 
   const searchContactsByIMEI = () => {
-    fetch(`http://127.0.0.1:5000/api/contact/search_by_imei/?imei=${imeiNumber}`)
+    fetch(`http://127.0.0.1:5000/api/contact/search_by_imei/?imei=${imeiNumber}&start_date=${startDate}&end_date=${endDate}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok ' + response.statusText);
@@ -26,35 +44,80 @@ const SearchByIMEI = () => {
       });
   };
 
-  const exportToPDF = () => {
+  const handleExportPDF = () => {
     const doc = new jsPDF();
-    autoTable(doc, {
-      head: [['Phone Number', 'Start Date', 'End Date']],
-      body: searchDataIMEI.map(row => [row.phone_number, row.start_date, row.end_date])
+    let y = 10;
+    searchDataIMEI.forEach((data, index) => {
+      doc.text(`Result ${index + 1}`, 10, y);
+      Object.keys(data).forEach((key) => {
+        y += 10;
+        doc.text(`${key}: ${data[key]}`, 10, y);
+      });
+      y += 10;
     });
-    doc.save('IMEI_Report.pdf');
+    doc.save('search_results.pdf');
+    toast({
+      title: 'PDF Exported.',
+      description: 'Your search results have been saved as a PDF.',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
-  const exportToExcel = () => {
+  const handleExportExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(searchDataIMEI);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "IMEI Report");
-    XLSX.writeFile(workbook, "IMEI_Report.xlsx");
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Results');
+    XLSX.writeFile(workbook, 'search_results.xlsx');
+    toast({
+      title: 'Excel Exported.',
+      description: 'Your search results have been saved as an Excel file.',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }} w="100%" bg="secondaryGray.400">
+    <Box pt={{ base: "130px", md: "80px", xl: "50px" }} w="100%" bg="white" rounded="xl" boxShadow="lg" p={8}>
+            <Text fontSize="2xl" mb="6" color="black">Recherche du traffic via IMEI</Text>
+
       <Flex mb="20px" wrap="wrap" justifyContent="space-between" alignItems="center">
         <Input
           placeholder="Search by IMEI"
           value={imeiNumber}
           onChange={(e) => setIMEINumber(e.target.value)}
-          width="30%"
-          bg="gray.700"
-          color="white"
+          width="20%"
+          bg="gray.100"
+          color="black"
           fontSize="lg"
-          borderColor="gray.600"
-          _placeholder={{ color: "white" }}
+          borderColor="gray.300"
+          _placeholder={{ color: "gray.500" }}
+        />
+        <Input
+          type="date"
+          placeholder="Start Date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          width="20%"
+          bg="gray.100"
+          color="black"
+          fontSize="lg"
+          borderColor="gray.300"
+          _placeholder={{ color: "gray.500" }}
+        />
+        <Input
+          type="date"
+          placeholder="End Date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          width="20%"
+          bg="gray.100"
+          color="black"
+          fontSize="lg"
+          borderColor="gray.300"
+          _placeholder={{ color: "gray.500" }}
         />
         <Button
           onClick={searchContactsByIMEI}
@@ -66,41 +129,57 @@ const SearchByIMEI = () => {
           Search
         </Button>
         <Button
-          onClick={exportToPDF}
-          colorScheme="blue"
+          onClick={handleExportPDF}
           fontSize="lg"
-          px="6"
-          py="2"
-          ml="10px"
+          p="0"
+          rounded="full"
+          ml="2"
+          bg="transparent"
+          boxShadow="md"
+          _hover={{ transform: 'scale(1.1)' }}
+          transition="all 0.3s"
         >
-          Export to PDF
+          <Image src={pdfIcon} alt="Export PDF" boxSize="50px" />
         </Button>
         <Button
-          onClick={exportToExcel}
-          colorScheme="blue"
+          onClick={handleExportExcel}
           fontSize="lg"
-          px="6"
-          py="2"
-          ml="10px"
+          p="0"
+          rounded="full"
+          ml="2"
+          bg="transparent"
+          boxShadow="md"
+          _hover={{ transform: 'scale(1.1)' }}
+          transition="all 0.3s"
         >
-          Export to Excel
+          <Image src={excelIcon} alt="Export Excel" boxSize="50px" />
         </Button>
       </Flex>
       {error && <Text color="red.500">{error}</Text>}
-      <Table mt="20px">
+      <Table mt="20px" variant="striped" colorScheme="gray">
         <Thead>
           <Tr>
-            <Th color="Black" fontSize="lg">Phone Number</Th>
-            <Th color="Black" fontSize="lg">Start Date</Th>
-            <Th color="Black" fontSize="lg">End Date</Th>
+            <Th color="Black" fontSize="lg"> Number</Th>
+            <Th color="Black" fontSize="lg">Correspondent</Th>
+            <Th color="Black" fontSize="lg">Durée</Th>
+            <Th color="Black" fontSize="lg">Timestamp</Th>
+            <Th color="Black" fontSize="lg">Site</Th>
+            <Th color="Black" fontSize="lg">Locality</Th>
+            <Th color="Black" fontSize="lg">IMSI</Th>
+            <Th color="Black" fontSize="lg">Communication Type</Th>
           </Tr>
         </Thead>
         <Tbody>
           {searchDataIMEI.map((item, index) => (
             <Tr key={index}>
               <Td color="Black" fontSize="lg">{item.phone_number}</Td>
-              <Td color="Black" fontSize="lg">{item.start_date}</Td>
-              <Td color="Black" fontSize="lg">{item.end_date}</Td>
+              <Td color="Black" fontSize="lg">{item.correspondent}</Td>
+              <Td color="Black" fontSize="lg">{item.duration}</Td>
+              <Td color="Black" fontSize="lg">{item.timestamp}</Td>
+              <Td color="Black" fontSize="lg">{item.site_name}</Td>
+              <Td color="Black" fontSize="lg">{item.locality}</Td>
+              <Td color="Black" fontSize="lg">{item.imsi}</Td>
+              <Td color="Black" fontSize="lg">{item.communication_type}</Td>
             </Tr>
           ))}
         </Tbody>
