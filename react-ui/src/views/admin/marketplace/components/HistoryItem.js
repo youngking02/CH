@@ -1,4 +1,4 @@
-import React from "react";
+{ /*import React from "react";
 // Chakra imports
 import { Flex, Icon, Image, Text, useColorModeValue } from "@chakra-ui/react";
 // Custom components
@@ -65,4 +65,4 @@ export default function NFT(props) {
       </Flex>
     </Card>
   );
-}
+}*/};

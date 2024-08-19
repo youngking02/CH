@@ -37,7 +37,7 @@ import {
 // Custom components
 import Banner from "views/admin/marketplace/components/Banner";
 import TableTopCreators from "views/admin/marketplace/components/TableTopCreators";
-import HistoryItem from "views/admin/marketplace/components/HistoryItem";
+//import HistoryItem from "views/admin/marketplace/components/HistoryItem";
 import NFT from "components/card/NFT";
 import Card from "components/card/Card.js";
 
@@ -175,7 +175,7 @@ export default function Marketplace() {
               columnsData={tableColumnsTopCreators}
             />
           </Card>
-          <Card p='0px'>
+          { /*<Card p='0px'>
             <Flex
               align={{ sm: "flex-start", lg: "center" }}
               justify='space-between'
@@ -188,7 +188,7 @@ export default function Marketplace() {
               <Button variant='action'>See all</Button>
             </Flex>
 
-            <HistoryItem
+             <HistoryItem
               name='Colorful Heaven'
               author='By Mark Benjamin'
               date='30s ago'
@@ -230,7 +230,7 @@ export default function Marketplace() {
               image={Nft6}
               price='0.91 ETH'
             />
-          </Card>
+          </Card>*/}
         </Flex>
       </Grid>
       {/* Delete Product */}

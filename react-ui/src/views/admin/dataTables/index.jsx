@@ -3,9 +3,6 @@ import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, useColorModeVa
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import SearchByName from './SearchByName';
 import SearchByPhoneNumber from './SearchByPhoneNumber';
-import SearchByIMSI from './SearchByIMSI';
-import SearchByDateRange from './SearchByDateRange';
-import SearchByIMEI from './SearchByIMEI';
 
 const MainComponent = () => {
   const [activeComponent, setActiveComponent] = useState('name');
@@ -47,8 +44,8 @@ const MainComponent = () => {
             Identité
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => setActiveComponent('name')}>Search by Name</MenuItem>
-            <MenuItem onClick={() => setActiveComponent('number')}>Search by Number</MenuItem>
+            <MenuItem onClick={() => setActiveComponent('name')}>Recherche par Nom</MenuItem>
+            <MenuItem onClick={() => setActiveComponent('number')}>Recherche par Numero</MenuItem>
           </MenuList>
         </Menu>
         {/*<Button

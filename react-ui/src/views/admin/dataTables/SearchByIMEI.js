@@ -159,14 +159,15 @@ const SearchByIMEI = () => {
       <Table mt="20px" variant="striped" colorScheme="gray">
         <Thead>
           <Tr>
-            <Th color="Black" fontSize="lg"> Number</Th>
-            <Th color="Black" fontSize="lg">Correspondent</Th>
-            <Th color="Black" fontSize="lg">Durée</Th>
-            <Th color="Black" fontSize="lg">Timestamp</Th>
-            <Th color="Black" fontSize="lg">Site</Th>
-            <Th color="Black" fontSize="lg">Locality</Th>
-            <Th color="Black" fontSize="lg">IMSI</Th>
-            <Th color="Black" fontSize="lg">Communication Type</Th>
+          <Th fontSize="lg">MSISDN</Th>
+            <Th fontSize="lg">IMEI</Th>
+            <Th fontSize="lg">Partner ID</Th>
+            <Th fontSize="lg">Date & Heure</Th>
+            <Th fontSize="lg">Durée</Th>
+            <Th fontSize="lg">SITENAME</Th>
+            <Th fontSize="lg">Localité</Th>
+            <Th fontSize="lg">CDIR</Th>
+            <Th fontSize="lg">Mode</Th>
           </Tr>
         </Thead>
         <Tbody>

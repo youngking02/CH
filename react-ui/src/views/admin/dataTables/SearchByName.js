@@ -118,10 +118,10 @@ const SearchByName = () => {
       <Table mt="20px" variant="striped" colorScheme="gray">
         <Thead>
           <Tr>
-            <Th fontSize="xl">First Name</Th>
-            <Th fontSize="xl">Last Name</Th>
-            <Th fontSize="xl">Birth Date</Th>
-            <Th fontSize="xl">Phone Numbers</Th>
+            <Th fontSize="xl">Nom</Th>
+            <Th fontSize="xl">Prénom</Th>
+            <Th fontSize="xl">Date de Naissance</Th>
+            <Th fontSize="xl">Numéro</Th>
           </Tr>
         </Thead>
         <Tbody>

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Input, Button, Table, Thead, Tbody, Tr, Th, Td, Flex, Text } from "@chakra-ui/react";
+import { Box, Input, Button, Table, Thead, Tbody, Tr, Th, Td, Flex, Text, IconButton } from "@chakra-ui/react";
+import { FaFilePdf, FaFileExcel } from 'react-icons/fa';
+import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
 
 const SearchByIMSI = () => {
   const [searchData, setSearchData] = useState([]);
@@ -28,6 +31,27 @@ const SearchByIMSI = () => {
     } else {
       setError('Please enter IMSI, start date, and end date.');
     }
+  };
+
+  const handleExportPDF = () => {
+    const doc = new jsPDF();
+    let y = 10;
+    searchData.forEach((data, index) => {
+      doc.text(`Result ${index + 1}`, 10, y);
+      Object.keys(data).forEach((key) => {
+        y += 10;
+        doc.text(`${key}: ${data[key]}`, 10, y);
+      });
+      y += 10;
+    });
+    doc.save('search_results_by_imsi.pdf');
+  };
+
+  const handleExportExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(searchData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Results");
+    XLSX.writeFile(workbook, 'search_results_by_imsi.xlsx');
   };
 
   return (
@@ -77,6 +101,30 @@ const SearchByIMSI = () => {
           <Button onClick={searchByIMSI} colorScheme="orange" fontSize="lg" px="6" py="2">
             Search
           </Button>
+          <Flex>
+            <IconButton
+              onClick={handleExportPDF}
+              colorScheme="red"
+              icon={<FaFilePdf />}
+              fontSize="lg"
+              rounded="full"
+              transition="all 0.3s"
+              _hover={{ bg: "red.600", transform: "scale(1.05)" }}
+              aria-label="Export as PDF"
+              ml="2"
+            />
+            <IconButton
+              onClick={handleExportExcel}
+              colorScheme="green"
+              icon={<FaFileExcel />}
+              fontSize="lg"
+              rounded="full"
+              transition="all 0.3s"
+              _hover={{ bg: "green.600", transform: "scale(1.05)" }}
+              aria-label="Export as Excel"
+              ml="2"
+            />
+          </Flex>
         </Flex>
       </Box>
 
@@ -84,9 +132,9 @@ const SearchByIMSI = () => {
       <Table mt="20px">
         <Thead>
           <Tr>
-            <Th  fontSize="lg">Phone Number</Th>
-            <Th  fontSize="lg">Start Date</Th>
-            <Th  fontSize="lg">End Date</Th>
+            <Th fontSize="lg">Numero</Th>
+            <Th fontSize="lg">Start Date</Th>
+            <Th fontSize="lg">End Date</Th>
           </Tr>
         </Thead>
         <Tbody>

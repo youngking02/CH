@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Input, Button, Table, Thead, Tbody, Tr, Th, Td, Flex, Text, IconButton } from "@chakra-ui/react";
-import {  FaFilePdf, FaFileExcel } from 'react-icons/fa';
+import { Box, Input, Button, Table, Thead, Tbody, Tr, Th, Td, Flex, Text, IconButton, useToast } from "@chakra-ui/react";
+import { FaFilePdf, FaFileExcel } from 'react-icons/fa';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 
@@ -8,7 +8,8 @@ const SearchByNumber = () => {
   const [searchData, setSearchData] = useState([]);
   const [query, setQuery] = useState('');
   const [error, setError] = useState('');
-
+  const toast = useToast();
+  
   const searchContactsByNumber = (query) => {
     fetch(`http://127.0.0.1:5000/api/contact/search_by_phone_number/?phone_number=${encodeURIComponent(query)}`)
       .then(response => {
@@ -52,6 +53,13 @@ const SearchByNumber = () => {
       y += 10;
     });
     doc.save('search_results.pdf');
+    toast({
+      title: 'PDF Exporté.',
+      description: 'Les résultats de votre recherche ont été enregistrés au format PDF.',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
   };
 
   const handleExportExcel = () => {
@@ -59,6 +67,14 @@ const SearchByNumber = () => {
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Results");
     XLSX.writeFile(workbook, 'search_results.xlsx');
+    toast({
+      title: 'Excel Exporté.',
+      description: 'Les résultats de votre recherche ont été enregistrés au format Excel.',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      
+    });
   };
 
   return (
@@ -88,7 +104,6 @@ const SearchByNumber = () => {
             fontSize="lg"
             px="6"
             py="2"
-            
             rounded="full"
             transition="all 0.3s"
             _hover={{ bg: "blue.600", transform: "scale(1.05)" }}
@@ -126,19 +141,19 @@ const SearchByNumber = () => {
       <Table mt="20px" variant="striped" colorScheme="gray">
         <Thead>
           <Tr>
-            <Th  fontSize="lg" fontWeight="bold">First Name</Th>
-            <Th  fontSize="lg" fontWeight="bold">Last Name</Th>
-            <Th fontSize="lg" fontWeight="bold">Phone Number</Th>
-            <Th  fontSize="lg" fontWeight="bold">Birth Date</Th>
+            <Th  fontSize="lg" fontWeight="bold">Nom</Th>
+            <Th  fontSize="lg" fontWeight="bold">Prénom</Th>
+            <Th fontSize="lg" fontWeight="bold">Numéro</Th>
+            <Th  fontSize="lg" fontWeight="bold">Date de Naissance</Th>
           </Tr>
         </Thead>
         <Tbody>
           {Array.isArray(searchData) && searchData.map((contact, index) => (
             <Tr key={index}>
-              <Td  fontSize="lg">{contact.first_name}</Td>
-              <Td  fontSize="lg">{contact.last_name}</Td>
-              <Td  fontSize="lg">{query}</Td>
-              <Td  fontSize="lg">{contact.birth_date}</Td>
+              <Td>{contact.first_name}</Td>
+              <Td>{contact.last_name}</Td>
+              <Td>{contact.phone_number}</Td>
+              <Td>{contact.birth_date}</Td>
             </Tr>
           ))}
         </Tbody>
